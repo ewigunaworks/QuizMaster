@@ -146,7 +146,9 @@ module QuizMaster
           ans = !is_number?(answerJoin) ? NumbersInWords.in_numbers(answerJoin) : answerJoin
           return ans.to_i == find[:answer].to_i ? "Correct!" : "Incorrect!"
         else
-          return find[:answer].to_s.downcase == answerJoin.to_s.downcase ? "Correct!" : "Incorrect!"
+          ans = is_number?(answerJoin) ? NumbersInWords.in_words(answerJoin)  : answerJoin
+          ans = ans.gsub('-', ' ')
+          return ans.to_s.downcase == find[:answer].to_s.downcase ? "Correct" : "Incorrect"
         end
       else
         return "Question not found"
